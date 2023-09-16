@@ -1,0 +1,26 @@
+Freq <- c(0.6, 0.3, 0.4, 0.4, 0.2, 0.6, 0.3, 0.4, 0.9, 0.2)
+BP <- c(103, 87, 32, 42, 59, 109, 78, 205, 135, 176)
+first <- c(1, 1, 1, 1, 0, 0, 0, 0, NA, 1)
+second <- c(0, 0, 1, 1, 0, 1, 1, 1, 1, 1)
+finaldecision <- c(0, 1, 0, 1, 0, 1, 0, 1, 1, 1)
+data <- data.frame(Freq, BP, first, second, finaldecision)
+
+
+par(mfrow = c(1, 2)) # Set up a 1x2 grid for plots
+#Plot of visit frequency
+boxplot(data$Freq, main="Box Plot of Frequency")
+hist(data$Freq, main="Histogram of Frequency")
+
+#Plot of blood pressures
+boxplot(data$BP, main="Box Plot of Blood Pressure", ylab="BP")
+hist(data$BP, main="Histogram of BP")
+
+par(mfrow = c(1, 3)) # Set up a 1x3 grid for plots
+# Create a histogram for MD's ratings (First)
+hist(first, main="Histogram of MD's Ratings (First)", xlab="Rating", ylab="Frequency")
+
+# Create a histogram for MD's ratings (Second)
+hist(second, main="Histogram of MD's Ratings (Second)", xlab="Rating", ylab="Frequency")
+
+# Create a histogram for the final decision
+hist(finaldecision, main="Histogram of final decision", xlab="Rating", ylab="Frequency")
