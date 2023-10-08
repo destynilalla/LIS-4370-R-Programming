@@ -1,0 +1,21 @@
+#Creating an S3 Object
+my_s3 <- list(name = "Tim", age = 22, GPA = 3.7)
+class(my_s3) <- "Student"
+mode(my_s3)
+attributes(my_s3)
+mode(my_s3$name)
+
+#Creating an S4 Object
+setClass("Student", 
+         slots = list(name = "character", 
+                      age = "numeric", 
+                      GPA = "numeric"))
+
+my_s4 <- new("Student", name = "Tim", age = 22, GPA = 3.7)
+my_s4@name
+my_s4@age
+my_s4@GPA
+my_s4
+mode(my_s4)
+mode(slot(my_s4, "name"))
+mode(my_s4@name)
