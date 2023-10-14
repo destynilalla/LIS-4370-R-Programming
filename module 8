@@ -1,0 +1,29 @@
+#STEP 1
+# Install and load packages
+library(pryr)
+library(ISLR)
+library(boot)
+library(plyr)
+
+# Read data
+Student_assignment <- read.table("Assignment 6 Dataset.txt", header = TRUE, sep= ",")
+
+# Calculate mean with plyr
+StudentAverage <- ddply(Student_assignment, "Sex", transform, Grade_Average = mean(Grade))
+
+# Write the resulting output to a file
+write.table(StudentAverage, "StudentAverage.txt", sep = ",")
+
+#STEP 2
+# Filter the dataframe to include only rows where the student name contains the letter i
+i_students <- subset(Student_assignment, grepl("i", Name, ignore.case = TRUE))
+
+# Write the names to a file separated by commas (CSV)
+write.table(i_students, "i_Students.csv", sep = ",")
+
+#STEP 3
+# Choose the file to save the filtered data set
+filtered_file <- file.choose()
+
+# Write the filtered data set to the chosen file and convert it to a CSV file
+write.csv(i_students, filtered_file, row.names = FALSE)
