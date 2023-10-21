@@ -1,0 +1,28 @@
+fastfood <- read.csv("fastfood.csv")
+head(fastfood)
+
+library(ggplot2)
+#Bar chart of Total Calories Per Restuarant using ggplot2
+ggplot(fastfood, aes(x = restaurant, y = calories, fill = restaurant)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Total Calories by Restaurant",
+       x = "Restaurant",
+       y = "Total Calories") +
+  theme_minimal()
+
+#Scatterplot of total fat vs calories per restuarant using lattice
+library(lattice)
+xyplot(calories ~ total_fat | restaurant, data = fastfood,
+       groups = restaurant,
+       main = "Scatter Plot: Total Fat vs. Calories by Restaurant",
+       xlab = "Total Fat",
+       ylab = "Calories",
+       pch = 16,
+       cex = 0.8)
+
+# Boxplot of Distribution of Total Fat per Restaurant using base R
+boxplot(total_fat ~ restaurant, data = fastfood,
+        main = "Boxplot: Distribution of Total Fat by Restaurant",
+        xlab = "Restaurant",
+        ylab = "Total Fat",
+        col = rainbow(length(unique(fastfood$restaurant))))  
