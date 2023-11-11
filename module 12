@@ -1,0 +1,63 @@
+---
+title: "Air Quality Data Analysis"
+author: "Destyni Lalla"
+output: html_document
+date: "2023-11-11"
+---
+## LOADING LIBRARIES
+
+```{r setup}
+library(tidyverse)
+library(readr)
+```
+
+## LOADING DATA
+
+```{r cars}
+# Load data from CSV file
+air_data <- read.csv("airmay.csv", stringsAsFactors = FALSE)
+
+# View the first few rows of the dataset
+head(air_data)
+
+# Descriptive statistics
+summary(air_data)
+```
+
+## CLEANING DATA
+
+```{r pressure, echo=FALSE}
+# Check for missing values
+sum(is.na(air_data))
+
+# Remove rows with missing values (if appropriate)
+air_data_clean <- na.omit(air_data)
+
+# Display the cleaned data
+head(air_data_clean)
+```
+
+## MAKING VISUALS
+
+```{r}
+# Create a scatter plot for X1 vs Y using ggplot2
+ggplot(air_data_clean, aes(x = X1, y = Y)) +
+  geom_point() + # Add points
+  theme_minimal() + # Use a minimal theme
+  labs(title = 'Scatter plot of X1 vs Y', x = 'X1', y = 'Y') # Add labels
+
+# Create a time series plot using ggplot2
+ggplot(air_data_clean, aes(x = rownames, y = Y)) +
+  geom_line(group = 1) + # Add line for time series
+  geom_point() + # Add points to the line
+  theme_minimal() + # Use a minimal theme
+  labs(title = 'Time Series Plot of Y', x = 'Time (rownames)', y = 'Y Measurement') # Add labels
+
+# Create a histogram for X2 using ggplot2
+ggplot(air_data_clean, aes(x = X2)) +
+  geom_histogram(bins = 10, fill = 'skyblue', color = 'black') + # Define histogram properties
+  theme_minimal() + # Use a minimal theme
+  labs(title = 'Histogram of X2', x = 'X2', y = 'Frequency') # Add labels
+
+```
+
